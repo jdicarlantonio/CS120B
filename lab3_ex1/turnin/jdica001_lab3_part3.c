@@ -1,7 +1,7 @@
-/*	Author: jd
- *  Partner(s) Name: 
+/*	Author: Joseph DiCarlantonio
+ *  Partner(s) Name: Brandon Tran 
  *	Lab Section:
- *	Assignment: Lab #  Exercise #
+ *	Assignment: Lab 3  Exercise 3
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example

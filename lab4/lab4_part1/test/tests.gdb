@@ -1,4 +1,4 @@
-# Test file for lab3_part4
+# Test file for lab4_part1
 
 
 # commands.gdb provides the following functions for ease:
@@ -26,47 +26,50 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test "PINA: 0x00 => PORTB: 0x00, PORTC: 0x00"
-setPINA 0x00
-continue 2
-expectPORTB 0
-expectPORTC 0
-checkResult
-
-test "PINA: 0x01 => PORTB: 0x00, PORTC: 0x10"
+#  leaving button held
+test "PINA: 0x01 => PORTB: 0x02, state: WAIT1\n"
 setPINA 0x01
-continue 2
-expectPORTB 0x00
-expectPORTC 0x10
-checkResult
-
-test "PINA: 0x11 => PORTB: 0x01, PORTC: 0x10"
-setPINA 0x11
-continue 2
-expectPORTB 0x01
-expectPORTC 0x10
-checkResult
-
-test "PINA: 0xFC => PORTB: 0x0C, PORTC: 0xF0"
-setPINA 0xFC
-continue 2
-expectPORTB 0x0F
-expectPORTC 0xC0
-checkResult
-
-test "PINA: 0x18 => PORTB: 0x01, PORTC: 0x80"
-setPINA 0x18
-continue 2
-expectPORTB 0x01
-expectPORTC 0x80
-checkResult
-
-test "PINA: 0x2C => PORTB: 0x02, PORTC: 0xC0"
-setPINA 0x2C
-continue 2
+continue 5
 expectPORTB 0x02
-expectPORTC 0xC0
+expect state WAIT1
 checkResult
+
+# leaving button released
+test "PINA: 0x00 => PORTB: 0x01, state: LED0\n"
+set state = LED0
+setPINA 0x00
+continue 5
+expectPORTB 0x01
+expect state LED0
+checkResult
+
+# one full button click
+test "PINA: 0x01, PINA: 0x00 => PORTB: 0x02, state: LED1\n"
+set state = LED0
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x02
+expect state LED1
+checkResult
+
+# two full button clicks
+test "PINA: 0x01, PINA: 0x00, PINA: 0x01, PINA: 0x00 => PORTB: 0x01, state: LED0\n"
+set state = LED0
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x01
+expect state LED0
+checkResult
+
+
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed

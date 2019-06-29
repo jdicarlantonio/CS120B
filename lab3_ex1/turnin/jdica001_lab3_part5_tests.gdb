@@ -1,4 +1,4 @@
-# Test file for lab3_part4
+# Test file for lab3_part5
 
 
 # commands.gdb provides the following functions for ease:
@@ -26,46 +26,39 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test "PINA: 0x00 => PORTB: 0x00, PORTC: 0x00"
-setPINA 0x00
-continue 2
-expectPORTB 0
-expectPORTC 0
-checkResult
-
-test "PINA: 0x01 => PORTB: 0x00, PORTC: 0x10"
-setPINA 0x01
+test "PINB: 0x00, PIND: 0x00 => PORTB: 0x00"
+setPINB 0x00
+setPIND 0x00
 continue 2
 expectPORTB 0x00
-expectPORTC 0x10
 checkResult
 
-test "PINA: 0x11 => PORTB: 0x01, PORTC: 0x10"
-setPINA 0x11
-continue 2
-expectPORTB 0x01
-expectPORTC 0x10
-checkResult
-
-test "PINA: 0xFC => PORTB: 0x0C, PORTC: 0xF0"
-setPINA 0xFC
-continue 2
-expectPORTB 0x0F
-expectPORTC 0xC0
-checkResult
-
-test "PINA: 0x18 => PORTB: 0x01, PORTC: 0x80"
-setPINA 0x18
-continue 2
-expectPORTB 0x01
-expectPORTC 0x80
-checkResult
-
-test "PINA: 0x2C => PORTB: 0x02, PORTC: 0xC0"
-setPINA 0x2C
+test "PINB: 0x00, PIND: 0xFF => PORTB: 0x02"
+setPINB 0x00
+setPIND 0xFF
 continue 2
 expectPORTB 0x02
-expectPORTC 0xC0
+checkResult
+
+test "PINB: 0x01, PIND: 0x22 => PORTB: 0x04"
+setPINB 0x01
+setPIND 0x22
+continue 2
+expectPORTB 0x04
+checkResult
+
+test "PINB: 0x01, PIND: 0x02 => PORTB: 0x00"
+setPINB 0x01
+setPIND 0x02
+continue 2
+expectPORTB 0x00
+checkResult
+
+test "PINB: 0x01, PIND: 0xF0 => PORTB: 0x02"
+setPINB 0x01
+setPIND 0xF0
+continue 2
+expectPORTB 0x02
 checkResult
 
 # Report on how many tests passed/tests ran

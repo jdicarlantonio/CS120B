@@ -31,7 +31,7 @@ echo "Creating project templates for source, tests, and Makefile..."
 # Create the main.c file
 touch $name/source/main.c
 cat > $name/source/main.c << EOF
-/*	Author: $USER
+/*	Author: Joseph DiCarlantonio
  *  Partner(s) Name: $partner
  *	Lab Section:
  *	Assignment: Lab #  Exercise #
@@ -45,11 +45,13 @@ cat > $name/source/main.c << EOF
 #include "simAVRHeader.h"
 #endif
 
-int main(void) {
+int main(void) 
+{
     /* Insert DDR and PORT initializations */
 
     /* Insert your solution below */
-    while (1) {
+    while (1) 
+    {
 
     }
     return 1;
@@ -73,7 +75,7 @@ cat > $name/header/simAVRHeader.h << EOF
 #endif
 
 #include <avr/sleep.h>
-#include "simavr/sim/avr/avr_mcu_section.h"
+#include "avr/avr_mcu_section.h"
 AVR_MCU(F_CPU,"$mmcu");
 AVR_MCU_VCD_FILE("build/results/${name}_trace.vcd",1000);
 

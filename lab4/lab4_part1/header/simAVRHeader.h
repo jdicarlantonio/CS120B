@@ -7,7 +7,7 @@
 #include <avr/sleep.h>
 #include "avr/avr_mcu_section.h"
 AVR_MCU(F_CPU,"atmega1284");
-AVR_MCU_VCD_FILE("build/results/lab3_part4_trace.vcd",1000);
+AVR_MCU_VCD_FILE("build/results/lab4_part1_trace.vcd",1000);
 
 const struct avr_mmcu_vcd_trace_t _mytrace[] _MMCU_ = {
     { AVR_MCU_VCD_SYMBOL("PINA0"), .mask = 1 << 0,.what = (void*)&PINA, } , // Example individual pin

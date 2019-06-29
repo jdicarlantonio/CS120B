@@ -1,8 +1,0 @@
-Breakpoint 1 at 0xf0: file source/main.c, line 28.
-Note: automatically using hardware breakpoints for read-only addresses.
-======================================================
-Running all tests..."
-
-"PINA: 0x00, PINB: 0x00 => PORTC: 0x00"...Error detected on fd 14
-test/tests.gdb:35: Error in sourced command file:
-Remote communication error.  Target disconnected.: Resource temporarily unavailable.
