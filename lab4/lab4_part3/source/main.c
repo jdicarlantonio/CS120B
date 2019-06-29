@@ -17,15 +17,19 @@
 #define sharp   (PINA & 0x04)
 #define inHouse (PINA & 0x80)
 
+enum DoorLock
+{
+    LOCKED = 0,
+    UNLOCKED
+} door;
+
 enum States
 {
-    WAIT,
-    SHARP_DOWN,
-    SHARP_RELEASE,
-    Y_DOWN,
-    UNLOCK,
-    INHOUSE_DOWN,
-    LOCK
+    WAIT,               // 0
+    SHARP_DOWN,         // 1
+    SHARP_RELEASE,      // 2
+    Y_DOWN,             // 3
+    UNLOCK,             // 4
 } state;
 
 void tick()
@@ -35,50 +39,95 @@ void tick()
     {
         case WAIT:
         {
-            if((Y || X) && !sharp)
+            if(sharp && !X && !Y) 
             {
-                state = WAIT;
+                state = SHARP_DOWN; 
             }
-            else if(sharp && !Y && !X)
+            else
             {
-                state = SHARP_DOWN;
-            }
-            else if(inHouse)
-            {
-                state = INHOUSE_DOWN;
+                state = WAIT; 
             }
 
             break;
         }
         case SHARP_DOWN:
         {
-            if(sharp && (Y || X))
+            if(!sharp && !X && !Y) 
             {
-                state = WAIT;
+                state = SHARP_RELEASE; 
             }
-            else if(sharp)
+            else if(sharp && (X || Y))
             {
-                state = SHARP_DOWN;
+                state = WAIT; 
             }
-            else if(!sharp)
+            else if(sharp && !X && !Y)
             {
-                state = SHARP_RELEASE;
+                state = SHARP_DOWN; 
             }
-           
-            break; 
+
+            break;
         }
         case SHARP_RELEASE:
         {
-            if(Y && !sharp && !X)
+            if(Y && !sharp && !X) 
             {
-                state = Y_DOWN;
+                state = Y_DOWN; 
             }
             else if(sharp || X)
             {
-                state = WAIT;
+                state = WAIT; 
             }
+            else if(!sharp && !X && !Y)
+            {
+                state = SHARP_RELEASE; 
+            }
+
+            break;
+        }
+        case Y_DOWN:
+        {
+            if(!Y && !sharp && !X) 
+            {
+                state = UNLOCK; 
+            }
+            else if(Y && (sharp || X))
+            {
+                state = WAIT; 
+            }
+            else if(Y && !sharp && !X)
+            {
+                state = Y_DOWN; 
+            }
+
+            break;
+        }
+        case UNLOCK:
+        {
+            if(inHouse) 
+            {
+                state = WAIT;  
+            }
+            else
+            {
+                state = UNLOCK; 
+            }
+
+            break;
         }
     }
+
+    // actions
+    switch(state)
+    {
+        case WAIT:
+        case SHARP_DOWN:
+        case SHARP_RELEASE:
+        case Y_DOWN: door = LOCKED; break;
+        case UNLOCK: door = UNLOCKED; break;
+        default: door = LOCKED;
+    }
+
+    PORTB = door;
 }
 
 int main(void) 
@@ -86,6 +135,7 @@ int main(void)
     DDRA = 0x00; PORTA = 0xFF;
     DDRB = 0xFF; PORTB = 0x00;
 
+    door = LOCKED;
     state = WAIT;
     while (1) 
     {

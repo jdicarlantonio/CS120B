@@ -27,7 +27,7 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # correct sequence entered
-test "PINA: 0x04, PINA: 0x00, PINA: 0x02, PINA: 0x00 => PORTB: 0x01, state: WAIT"
+test "PINA: 0x04, PINA: 0x00, PINA: 0x02, PINA: 0x00 => PORTB: 0x01, state: UNLOC"
 setPINA 0x04
 continue 5
 setPINA 0x00
@@ -37,11 +37,12 @@ continue 5
 setPINA 0x00
 continue 5
 expectPORTB 0x01
-expect state WAIT
+expect state UNLOCK
 checkResult
 
 # door lock by pressing inHouse
 test "PINA: 0x80, PINA: 0x00 => PORTB: 0x00, state: WAIT"
+set state = WAIT
 setPINA 0x80
 continue 5
 setPINA 0x00

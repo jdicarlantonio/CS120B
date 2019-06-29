@@ -1,0 +1,7 @@
+Breakpoint 1 at 0x28a: file source/main.c, line 140.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"PINA: 0x04, PINA: 0x00, PINA: 0x02, PINA: 0x00 => PORTB: 0x01, state: UNLOC"..."PINA: 0x80, PINA: 0x00 => PORTB: 0x00, state: WAIT"..."PINA: 0x01, PINA: 0x00, PINA: 0x02, PINA: 0x00 => PORTB: 0x00, state: WAIT"..."PINA: 0x04, PINA: 0x00, PINA: 0x01, PINA: 0x00 => PORTB: 0x00, state: WAIT"..."PINA: 0x06, PINA: 0x00 => PORTB: 0x00, state: WAIT"..."PINA: 0x07, PINA: 0x00 => PORTB: 0x00, state: WAIT"..."PINA: 0x04, PINA: 0x06 => PORTB: 0x00, state: WAIT"...======================================================
+Remote doesn't know how to detach
