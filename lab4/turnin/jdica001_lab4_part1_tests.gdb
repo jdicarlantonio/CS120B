@@ -1,4 +1,4 @@
-# Test file for lab_chip
+# Test file for lab4_part1
 
 
 # commands.gdb provides the following functions for ease:
@@ -26,16 +26,50 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-# Add tests below
+#  leaving button held
+test "PINA: 0x01 => PORTB: 0x02, state: WAIT1\n"
+setPINA 0x01
+continue 5
+expectPORTB 0x02
+expect state WAIT1
+checkResult
 
-# SAMPLE:
-test "PORTB: 0x0F"
+# leaving button released
+test "PINA: 0x00 => PORTB: 0x01, state: LED0\n"
+set state = LED0
+setPINA 0x00
+continue 5
+expectPORTB 0x01
+expect state LED0
+checkResult
+
+# one full button click
+test "PINA: 0x01, PINA: 0x00 => PORTB: 0x02, state: LED1\n"
+set state = LED0
 setPINA 0x01
 continue 5
 setPINA 0x00
 continue 5
-expectPORTB 0x0F
+expectPORTB 0x02
+expect state LED1
 checkResult
+
+# two full button clicks
+test "PINA: 0x01, PINA: 0x00, PINA: 0x01, PINA: 0x00 => PORTB: 0x01, state: LED0\n"
+set state = LED0
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+setPINA 0x01
+continue 5
+setPINA 0x00
+continue 5
+expectPORTB 0x01
+expect state LED0
+checkResult
+
+
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed

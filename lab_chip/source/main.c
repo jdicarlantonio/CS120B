@@ -16,7 +16,7 @@
 int main(void) 
 {
     DDRA = 0x00; PORTA = 0xFF;
-    DDRB = 0xFF; PORTB = 0x00;
+    DDRC = 0xFF; PORTC = 0x00;
 
     unsigned char led = 0x00;
     unsigned char button = 0x00;
@@ -26,14 +26,14 @@ int main(void)
 
         if(button)
         {
-            led = (led & 0xFC) | 0x01;
+            led = 0xFF;
         }
         else
         {
-            led = (led & 0xFC) | 0x02;
+            led = 0x00;
         }
 
-        PORTB = led;
+        PORTC = led;
     }
     return 1;
 }

@@ -1,7 +1,7 @@
-/*	Author: jd
- *  Partner(s) Name: 
+/*	Author: Joseph DiCarlantonio
+ *  Partner(s) Name: Brandon Tran 
  *	Lab Section:
- *	Assignment: Lab #  Exercise #
+ *	Assignment: Lab 5  Exercise 1
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
@@ -21,7 +21,7 @@ int main(void)
     unsigned char fuelSensor = 0x00; 
     while (1) 
     {
-        fuelSensor = PINA;
+        fuelSensor = ~PINA & 0x0F;
 
         switch(fuelSensor)
         {
