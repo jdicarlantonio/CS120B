@@ -1,0 +1,7 @@
+Breakpoint 1 at 0xe6: file source/main.c, line 20.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"PORTB: 0x0F"...======================================================
+Remote doesn't know how to detach
