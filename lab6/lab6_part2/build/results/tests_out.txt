@@ -1,0 +1,10 @@
+Breakpoint 1 at 0x30c: file source/main.c, line 108.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"button down on led 1"...
+	Expected 0x01 
+	PORTB '0x800025:	0x02
+======================================================
+Remote doesn't know how to detach

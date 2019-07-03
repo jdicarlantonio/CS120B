@@ -1,0 +1,7 @@
+Breakpoint 1 at 0x1d2: file source/main.c, line 111.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"pressing button once"..."pressing button twice"..."pressing button thrice"..."pressing button after 14"..."backwards sequence"...======================================================
+Remote doesn't know how to detach

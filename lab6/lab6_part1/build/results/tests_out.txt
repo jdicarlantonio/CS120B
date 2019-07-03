@@ -1,0 +1,7 @@
+Breakpoint 1 at 0x2b0: file source/main.c, line 58.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"PORTC: 0x01"..."PORTC: 0x02"..."PORTC: 0x04"..."PORTC: 0x01 (repeat)"...======================================================
+Remote doesn't know how to detach

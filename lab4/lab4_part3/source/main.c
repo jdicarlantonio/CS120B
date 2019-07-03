@@ -1,4 +1,4 @@
-/*	Author: jd
+/*	Author: Joseph Dicarlantonio
  *  Partner(s) Name: Brandon Tran
  *	Lab Section:
  *	Assignment: Lab #  Exercise #
