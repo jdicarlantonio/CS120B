@@ -1,0 +1,7 @@
+Breakpoint 1 at 0x68e: file source/main.c, line 257.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"PINA: 0x00 => PORTC: 0x00, state: WAIT_BUTTON"..."PINA: 0x01, PINA: 0x00 => PORTC: 0x08, state: WAIT_BUTTON"..."PINA: 0x02, PINA: 0x00 => PORTC: 0x06, state: WAIT_BUTTON"..."PINA: 0x01 => PORTC: 0x08, state: INC_HELD"..."PINA: 0x02 => PORTC: 0x06, state: DEC_HELD"..."PINA: 0x03, PINA: 0x00 => PORTC: 0x00, state: WAIT_BUTTON"..."PINA: 0x01, PINA: 0x03, PINA: 0x00 => PORTC: 0x00, state: WAIT_BUTTON"..."PINA: 0x02, PINA: 0x03, PINA: 0x00 => PORTC: 0x00, state: WAIT_BUTTON"...======================================================
+Remote doesn't know how to detach

@@ -3,5 +3,5 @@ Note: automatically using hardware breakpoints for read-only addresses.
 ======================================================
 Running all tests..."
 
-"PORTC: 0x01"..."PORTC: 0x02"..."PORTC: 0x04"..."PORTC: 0x01 (repeat)"...======================================================
+"PORTB: 0x01"..."PORTB: 0x02"..."PORTB: 0x04"..."PORTB: 0x01 (repeat)"..."PORTB: 0x02 (repeat)"..."PORTB: 0x04 (repeat)"...======================================================
 Remote doesn't know how to detach

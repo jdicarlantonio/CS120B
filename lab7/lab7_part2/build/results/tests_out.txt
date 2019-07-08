@@ -1,0 +1,7 @@
+Breakpoint 1 at 0x4e4: file source/main.c, line 207.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"LED1"..."LED2"..."LED3"..."button press on LED3"..."button press on LED1"..."button press on LED2"...======================================================
+Remote doesn't know how to detach
