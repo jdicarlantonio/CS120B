@@ -9,6 +9,8 @@
 
 #define start (~PINA & 0x08)
 
+#define EEPROM_SCORE_LOC 5
+
 #define LCD_ROW_SIZE 15
 #define OBSTACLE_BEGIN 2
 #define OBSTACLE_SIZE 35
@@ -32,7 +34,9 @@ enum GameStates
     SC_INIT,
     SCROLL,
     MENU,
-    START_HELD
+    START_HELD,
+    RESET_HELD,
+    GAME_OVER
 };
 
 unsigned char getNextSprite(unsigned char* spriteSheet, unsigned long sz)
@@ -57,6 +61,7 @@ int gameTick(int state)
     static unsigned char tmpObstacle[LCD_ROW_SIZE + 1];
     static unsigned char position = 0;
     static unsigned char crosshairPos;
+    static unsigned char highScore;
     unsigned char i;
 
     // transitions
@@ -65,8 +70,16 @@ int gameTick(int state)
         case SC_START: state = SC_INIT; break;
         case SC_INIT: 
         {
-            //LCD_ClearScreen();
-            LCD_DisplayString(5, "Monster       Press Start");
+            if(eeprom_read_byte((const uint8_t*)EEPROM_SCORE_LOC) >= 255)
+            {
+                highScore = 0; 
+            }
+            else
+            {
+                highScore = eeprom_read_byte((const uint8_t*)EEPROM_SCORE_LOC);
+            }
+
+            LCD_DisplayString(1, "Monster Shooter   Press Start");
             state = MENU; 
             break;
         }
@@ -75,11 +88,30 @@ int gameTick(int state)
             // start button is same as reset
             if(start) 
             {
-                state = SC_INIT; 
+                state = RESET_HELD; 
             }
             else
             {
                 state = SCROLL; 
+            }
+
+            if(tmpObstacle[0] == MONSTER && !ducking)
+            {
+                LCD_ClearScreen();
+                LCD_DisplayString(1, "Game Over");
+                if(currentScore > highScore)
+                {
+                    eeprom_update_byte((uint8_t*)EEPROM_SCORE_LOC, currentScore);
+
+                    LCD_DisplayString(17, "New Score: ");
+                    LCD_DisplayDigit(29, currentScore);
+                }
+                else
+                {
+                    LCD_DisplayString(17, "High Score: ");
+                    LCD_DisplayDigit(29, highScore);
+                }
+                state = GAME_OVER; 
             }
             
             break;
@@ -117,6 +149,30 @@ int gameTick(int state)
             }
 
             break;
+        }
+        case RESET_HELD:
+        {
+            if(start) 
+            {
+                state = RESET_HELD; 
+            }
+            else
+            {
+                state = SC_INIT; 
+            }
+
+            break;
+        }
+        case GAME_OVER:
+        {
+            if(start) 
+            {
+                state = RESET_HELD;                 
+            }
+            else
+            {
+                state = GAME_OVER; 
+            }
         }
     }
 
@@ -185,11 +241,17 @@ int gameTick(int state)
             inMenu = 1; 
 
             activeBulletSpace = 0;
-//            LCD_DisplayString(19, "Press Start");
 
             break;
         }
         case START_HELD: break;
+        case RESET_HELD: break;
+        case GAME_OVER: 
+        {
+            inMenu = 1;
+
+            break;
+        }
     }
 
     return state;

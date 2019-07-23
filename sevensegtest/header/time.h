@@ -17,7 +17,10 @@ typedef struct _Task
     int (*TickFct) (int);
 } Task;
 
-void TimerISR();
+void TimerISR()
+{
+    TimerFlag = 0;
+}
 
 void TimerOn()
 {

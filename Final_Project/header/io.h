@@ -5,6 +5,8 @@
 #include <avr/interrupt.h>
 #include <stdio.h>
 
+#include "shiftRegister.h"
+
 #define SET_BIT(p,i) ((p) |= (1 << (i)))
 #define CLR_BIT(p,i) ((p) &= ~(1 << (i)))
 #define GET_BIT(p,i) ((p) & (1 << (i)))
@@ -33,17 +35,18 @@ void LCD_ClearScreen(void) {
 void LCD_Init(void) {
 
     //wait for 100 ms.
-	delay_ms(100);
-	LCD_WriteCommand(0x38);
-	LCD_WriteCommand(0x06);
-	LCD_WriteCommand(0x0f);
-	LCD_WriteCommand(0x01);
-	delay_ms(10);						 
+    delay_ms(100);
+    LCD_WriteCommand(0x38);
+    LCD_WriteCommand(0x06);
+    LCD_WriteCommand(0x0f);
+    LCD_WriteCommand(0x01);
+    delay_ms(10);						 
 }
 
 void LCD_WriteCommand (unsigned char Command) {
    CLR_BIT(CONTROL_BUS,RS);
-   DATA_BUS = Command;
+   //DATA_BUS = Command;
+   shiftWrite(Command);
    SET_BIT(CONTROL_BUS,E);
    asm("nop");
    CLR_BIT(CONTROL_BUS,E);
@@ -52,7 +55,8 @@ void LCD_WriteCommand (unsigned char Command) {
 
 void LCD_WriteData(unsigned char Data) {
    SET_BIT(CONTROL_BUS,RS);
-   DATA_BUS = Data;
+//   DATA_BUS = Data;
+    shiftWrite(Data);
    SET_BIT(CONTROL_BUS,E);
    asm("nop");
    CLR_BIT(CONTROL_BUS,E);
@@ -60,7 +64,7 @@ void LCD_WriteData(unsigned char Data) {
 }
 
 void LCD_DisplayString( unsigned char column, const char* string) {
-   LCD_ClearScreen();
+//   LCD_ClearScreen();
    unsigned char c = column;
    while(*string) {
       LCD_Cursor(c++);

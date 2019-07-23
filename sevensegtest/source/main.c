@@ -20,15 +20,17 @@
 int main(void) 
 {
     DDRB = 0xFF; PORTB = 0x00; 
-    DDRA = 0x00; PORTA = 0xFF;
     DDRD = 0xFF; PORTD = 0x00;
     DDRC = 0xFF; PORTC = 0x00;
-  
+    
+    shiftInit();
     LCD_Init();
- 
+    
+    LCD_Cursor(1);
+    LCD_WriteData('a');
+
     while (1) 
     {
-        shiftWrite(0xEB);
 
     }
 
