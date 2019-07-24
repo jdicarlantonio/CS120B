@@ -18,13 +18,13 @@ enum MovementFlag
 {
     FALSE,
     TRUE
-} walking, ducking;
+} ducking;
 
 enum PlayerMovementStates
 {
     WAIT,
-    MOVE_RIGHT, // moves player over once
-    SCROLL_RIGHT, // continues to scroll player
+//    MOVE_RIGHT, // moves player over once
+//    SCROLL_RIGHT, // continues to scroll player
     DUCK // for dodging, ducking, dipping, diving, and dodging
 };
 
@@ -46,11 +46,12 @@ int playerMovementTick(int state)
         {
             if(inMenu == 0)
             {
+                /*
                 if(R && !D) 
                 {
                     state = MOVE_RIGHT; 
-                }
-                else if(!R && D)
+                } */
+                if(D)
                 {
                     state = DUCK; 
 
@@ -64,7 +65,7 @@ int playerMovementTick(int state)
             }
             break;
         }
-        case MOVE_RIGHT:
+/*        case MOVE_RIGHT:
         {
             if(R && !D) 
             {
@@ -92,10 +93,10 @@ int playerMovementTick(int state)
             }
 
             break;
-        }
+        } */
         case DUCK:
         {
-            if(D && !R) 
+            if(D) 
             {
                 state = DUCK; 
             }
@@ -120,12 +121,12 @@ int playerMovementTick(int state)
         case WAIT: 
         {
             count = 0; 
-            walking = FALSE;
+//            walking = FALSE;
             ducking = FALSE;
             
             break;
         }
-        case MOVE_RIGHT:
+/*        case MOVE_RIGHT:
         {
             walking = TRUE;
             ducking = FALSE;
@@ -150,10 +151,10 @@ int playerMovementTick(int state)
             }
 
             break;
-        }
+        } */
         case DUCK:
         {
-            walking = FALSE;
+//            walking = FALSE;
             ducking = TRUE;
             
             LCD_Cursor(ROW2_BEGIN);
